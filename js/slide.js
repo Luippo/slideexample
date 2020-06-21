@@ -6,7 +6,9 @@ var p = {
     animacionSlide: "slide",
     imgSlide: document.querySelectorAll("#slide ul li"),
     avanzar: document.querySelector("#slide #avanzar"),
-    retroceder: document.querySelector("#slide #retroceder")
+    retroceder: document.querySelector("#slide #retroceder"),
+    velocidadSlide: 3000,
+    formatearLoop: false
 }
 // Objeto con Metodos del Sline
 var m = {
@@ -16,6 +18,7 @@ var m = {
         }
         p.avanzar.addEventListener("click",m.avanzar);
         p.retroceder.addEventListener("click",m.retroceder);
+        m.intervalo();
     },
     paginacionSlide: function(item){
         p.item = item.target.parentNode.getAttribute("item") - 1; // ParentNode, sirve para llamar al padre.
@@ -39,7 +42,8 @@ var m = {
         console.log(p.item);
         m.movimientoSlide(p.item);
     },
-    movimientoSlide: function(item){        
+    movimientoSlide: function(item){
+        p.formatearLoop = true;        
         p.cajaSlide.style.left = item * -100 + "%";
         for(var i = 0; i < p.paginacion.length; i++){
             p.paginacion[i].style.opacity = .5;
@@ -55,8 +59,17 @@ var m = {
                 p.imgSlide[item].style.opacity = 1;
             }, 500);
             
-        }
-        
+        }        
+    },
+    intervalo: function(){
+        setInterval(function(){
+            if(p.formatearLoop){
+                p.formatearLoop = false;
+            }else{
+                m.avanzar();
+            }
+            
+        }, p.velocidadSlide);         
     }
 }
 
