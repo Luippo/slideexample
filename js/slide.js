@@ -31,8 +31,7 @@ var m = {
             p.item = 0;
         }else{
             p.item++;
-        }
-        console.log(p.item);
+        }        
         m.movimientoSlide(p.item);
     },
     retroceder: function(){
@@ -40,8 +39,7 @@ var m = {
             p.item = p.imgSlide.length - 1;
         }else{
             p.item--;
-        }
-        console.log(p.item);
+        }        
         m.movimientoSlide(p.item);
     },
     movimientoSlide: function(item){
